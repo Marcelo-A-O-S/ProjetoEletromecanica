@@ -14,15 +14,15 @@ Este projeto consiste no desenvolvimento de uma **carregadeira automatizada**, c
 
 ### 🔧 Hardware
 - **ESP32** — Microcontrolador com Wi-Fi/Bluetooth
-- **Servo motor mg996r**  - Servo utilizado para trasionar e controlar a Pa
-- **Servo motor MG90s** - Servo utilizado para controlar a direcao
+- **Servo motor mg996r**  - Servo utilizado para tracion e controlar a pá
+- **Servo motor MG90s** - Servo utilizado para controlar a direção
 - **Protoboard** - Construir e organizar o circuito
 
 ### 💻 Software
 - **Plataforma de Desenvolvimento**: VS Code com PlatformIO
 - **Linguagem (Firmware)**: C++ (ESP32)
-- **Backend**: Node.js + Express (API REST para armazenamento de dados)
-- **Frontend**: Next.js + TailwindCSS (Interface visual e monitoramento)
+- **Backend**: Node.js + Express (API REST para armazenamento de dados) + Typescript
+- **Frontend**: Next.js + TailwindCSS (Interface visual e monitoramento) + Typescript
 
 ---
 
