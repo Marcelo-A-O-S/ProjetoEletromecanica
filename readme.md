@@ -1,4 +1,4 @@
-# 🚜 Carregadeira Automatizada com ESP32 + API Node + Next.js
+# 🚜 Carregadeira Automatizada com ESP32 + API Node + Next.js + Typescrit + C++
 
 Projeto desenvolvido para avaliação da disciplina de **Projetos** do curso **Técnico em Eletromecânica**, no **Colégio Estadual Professor Gastão Valle**.
 
