@@ -42,6 +42,7 @@ export default function ExecuteJoystickWebsocket({ configuration,dataConfigurati
         socketRef.current = new WebSocket(`${data.protocol}${data.host}`);
         socketRef.current.onopen = () => {
             console.log('Conectado ao WebSocket');
+            setIsStarting(true)
             
         };
         socketRef.current.onmessage = (event) => {
@@ -66,18 +67,21 @@ export default function ExecuteJoystickWebsocket({ configuration,dataConfigurati
     const closeConnection = async () => {
         socketRef.current?.close();
         console.log('Conexão WebSocket fechada');
+        setIsStarting(false)
         onSuccess();
     }
     return (
         <>
             <Card>
                 <CardHeader>
-                    <div>
+                    <div className="flex flex-col gap-2">
                         <div>
                             <CardTitle className="font-bold text-2xl">{configuration.name}</CardTitle>
                             <CardDescription>{configuration.description}</CardDescription>
                         </div>
-                        <div></div>
+                        <div className="flex w-full justify-end">
+                            <CardDescription>{isStarting?"Conectado": "Conectando..."}</CardDescription>
+                        </div>
                     </div>
                 </CardHeader>
                 <CardContent className="flex items-center justify-center">
@@ -96,12 +100,6 @@ export default function ExecuteJoystickWebsocket({ configuration,dataConfigurati
                             className="bg-secondary flex items-center hover:cursor-pointer">
                             <Pause />
                             Stop
-                        </Button>
-                        <Button
-
-                            className="bg-primary flex items-center hover:cursor-pointer">
-
-                            Testar
                         </Button>
                     </div>
                 </CardFooter>
