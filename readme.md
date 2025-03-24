@@ -107,7 +107,6 @@ Este projeto é de caráter educacional e não possui fins lucrativos.
 
 ## 💡 Extras (Ideias Futuras)
 
-- Integração com banco de dados (MongoDB ou SQLite)
 - Controle remoto via aplicativo mobile
 - Monitoramento em tempo real via WebSocket
 
