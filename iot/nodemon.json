@@ -1,0 +1,6 @@
+{
+    "watch": ["src","lib","lib/private_lib","data"],
+    "ext": "cpp,h,html",
+    "ignore": ["node_modules"],
+    "exec": "pio run"
+  }

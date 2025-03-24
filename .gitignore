@@ -1,0 +1,6 @@
+/painel
+/mobile
+.vscode
+/iot/node_modules
+/iot/.pio
+/iot/build

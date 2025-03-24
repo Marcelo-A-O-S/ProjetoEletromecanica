@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Integrado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .painel {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #555555;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #777777;
+            font-size: 14px;
+        }
+
+        .status, .informacoes, .controles, .temperatura, .memoria {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button.desligar {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="painel">
+        <h1>Painel Integrado</h1>
+        
+        <div class="status">
+            <h2>Status do Dispositivo</h2>
+            <p><span id="status"></span></p>
+        </div>
+
+        <div class="informacoes">
+            <h2>Informações da Placa</h2>
+            <p>ESP32 DevKit V1</p>
+            <p>Host: <span id="host"></span></p>
+            <p>Wi-Fi: <span id="wifi"></span></p>
+            <p>IP: <span id="ipadress"></span></p>
+        </div>
+    </div>
+<script>
+    async function atualizarDados(){
+            const response = await fetch("/dados");
+            if (!response.ok) {
+                throw new Error("Erro ao obter dados");
+            }
+            const dados = await response.json();
+            document.getElementById("ipadress").innerText = dados.IPAdress;
+            document.getElementById("wifi").innerText = dados.wifi;
+            document.getElementById("status").innerText = dados.status;
+            document.getElementById("host").innerText = dados.host;
+        }
+        setInterval(atualizarDados, 2000);
+        atualizarDados();
+
+</script>
+</body>
+</html>
