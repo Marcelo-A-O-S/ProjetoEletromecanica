@@ -6,9 +6,10 @@
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
 #include "ESPmDNS.h"
-#include "Servo.h"
-int pinServoMotor2 = 13;
-int pinServoMotor1 = 12;
+#include <ESP32Servo.h>
+
+int pinServoMotor2 = 26;
+int pinServoMotor1 = 25;
 int pinServoDirecao = 14;
 const char *host = "esp32.local";
 WifiProject *wifi = new WifiProject();
@@ -69,9 +70,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
         {
             const char *direction = doc["direction"];
             Serial.printf("Direção: %s\n", direction);
-            if(direction = "FORWARD"){
+            if(strcmp(direction, "FORWARD") == 0){
                 moveForward();
-            }else if(direction = "BACKWARD"){
+            }else if (strcmp(direction, "BACKWARD") == 0) {
                 moveBackward();
             }else{
                 stop();
@@ -143,9 +144,9 @@ void setup()
     webSocketServer.begin();
     webSocketServer.onEvent(webSocketEvent);
     Serial.println("Servidor WebSocket iniciado");
-    servoDirecao.attach(pinServoDirecao);
-    servoMotor1.attach(pinServoMotor1);
-    servoMotor2.attach(pinServoMotor2);
+    servoDirecao.attach(pinServoDirecao, 500, 2500);
+    servoMotor1.attach(pinServoMotor1, 500, 2500);
+    servoMotor2.attach(pinServoMotor2, 500, 2500);
     servoDirecao.write(90);
     servoMotor1.write(90);
     servoMotor2.write(90);
