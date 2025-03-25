@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { IConfiguration } from "@/domain/interfaces/IConfiguration";
 import { IConfigurationProject } from "@/domain/interfaces/IConfigurationProject";
 
-interface ConfigurationCardProps{
+interface ConfigurationProjectCardProps{
     configurationProject?: IConfigurationProject;
     configuration: IConfiguration;
     onDelete: (id:number)=>void;
@@ -15,7 +15,7 @@ interface ConfigurationCardProps{
     onSuccess: ()=> void;
     
 }
-export function ConfigurationCard({configurationProject,configuration,onDelete,onEdit, onSuccess}: ConfigurationCardProps){
+export function ConfigurationProjectCard({configurationProject,configuration,onDelete,onEdit, onSuccess}: ConfigurationProjectCardProps){
     const [ModalComponent, setModalComponent] = useState<React.ElementType | null>(null);
     const [ExecuteComponent, setExecuteComponent] = useState<React.ElementType | null>(null);
     const selectComponentDynamic = async(key:string) =>{

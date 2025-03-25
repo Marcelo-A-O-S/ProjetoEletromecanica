@@ -56,6 +56,7 @@ export default function ConfigurationsPage() {
                             onDelete={DeleteConfiguration}
                             onEdit={EditConfiguration}
                             configuration={configuration}
+                            onSuccess={onSuccess}
                             
                         />
                     ))}

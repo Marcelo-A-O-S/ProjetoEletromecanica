@@ -52,11 +52,7 @@ export class ConfigurationProjectController implements IConfigurationProjectCont
                 if(result.entity.id == 0){
                     res.status(401).json(result.message);
                 }else{
-                    const configurationServices = new ConfigurationServices();
-                    const configuration = await configurationServices.GetbyId(configurationId);
-                    if(configuration.componentKey == "formJoystickWebsocket"){
-                        const joystickWebsocket = new JoystickWebSocketConfiguration()
-                    }
+                    res.status(201).json(result.message);
                 }
                 
             }else{

@@ -1,5 +1,7 @@
 "use client"
+import { ConfigurationCard } from "@/components/configuration-card";
 import { ConfigurationProjectModal } from "@/components/configurationProject-modal";
+import { IConfiguration } from "@/domain/interfaces/IConfiguration";
 import { IProject } from "@/domain/interfaces/IProject";
 import { ConfigurationProject } from "@/domain/models/ConfigurationProject";
 import { getProjectById } from "@/services/projectServices";
@@ -35,6 +37,12 @@ export default function ConfigurationProjectPage({
     const OnSuccess = async() =>{
         await loadingData()
     }
+    const onDelete =(id:number)=>{
+
+    }
+    const onUpdate =(configuration:IConfiguration)=>{
+
+    }
     
     return(
         <main className="flex-1 mx-auto container py-6 ">
@@ -47,13 +55,22 @@ export default function ConfigurationProjectPage({
                     configuration={configurationProjectSelected}/>
                 </div>
             </div>
-            <div id="content" className="flex flex-col pt-5">
-                <div id="dataProject">
+            <div id="content" className="flex flex-col pt-5 space-y-6" >
+                <div id="dataProject" >
                     <h1 className="text-2xl font-medium">{project?.name}</h1>
                     <p>{project?.description}</p>
                 </div>
-                <div id="cards">
-                    
+                <div id="cards" >
+                    {project?.configurationsProjects?.map((configurationProject)=>{
+                        return configurationProject.configuration? (<ConfigurationCard
+                            configuration={configurationProject.configuration}
+                            configurationProject={configurationProject}
+                            onSuccess={OnSuccess}
+                            onDelete={onDelete}
+                            onEdit={onUpdate}
+
+                        />):(<></>)
+                    })}
                 </div>
             </div>
             
