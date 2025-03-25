@@ -117,8 +117,8 @@ void setup()
 {
     Serial.begin(9600);
     Serial.println("Projeto inicializado!");
-    wifi->setSSiD("AUGUSTO");
-    wifi->setPassword("08083890");
+    wifi->setSSiD("REDE");
+    wifi->setPassword("12345678");
     wifi->init();
     if (!MDNS.begin("esp32"))
     {
