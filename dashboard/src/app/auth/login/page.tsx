@@ -7,7 +7,7 @@ import Link from "next/link";
 import { z } from "zod";
 import { useAuth } from "@/context/auth-context";
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 const loginSchema = z.object({
     email: z.string().email("Informe um endereço de email válido!"),
     password: z.string().min(6, { message: "A senha necessita ter no minimo 6 caracteres!" })
@@ -16,8 +16,6 @@ type LoginFormValues = z.infer<typeof loginSchema>
 export default function LoginPage() {
     const auth = useAuth();
     const router = useRouter()
-    const searchParams = useSearchParams();
-    const from = searchParams.get("from") || "/";
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState<LoginFormValues>({
         email: '',
