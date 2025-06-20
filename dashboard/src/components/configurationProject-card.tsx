@@ -10,12 +10,13 @@ import { IConfigurationProject } from "@/domain/interfaces/IConfigurationProject
 interface ConfigurationProjectCardProps{
     configurationProject?: IConfigurationProject;
     configuration: IConfiguration;
+    projectId?:number;
     onDelete: (id:number)=>void;
     onEdit: (configuration: IConfiguration) => void;
     onSuccess: ()=> void;
     
 }
-export function ConfigurationProjectCard({configurationProject,configuration,onDelete,onEdit, onSuccess}: ConfigurationProjectCardProps){
+export function ConfigurationProjectCard({configurationProject,configuration,onDelete,onEdit, onSuccess,projectId}: ConfigurationProjectCardProps){
     const [ModalComponent, setModalComponent] = useState<React.ElementType | null>(null);
     const [ExecuteComponent, setExecuteComponent] = useState<React.ElementType | null>(null);
     const selectComponentDynamic = async(key:string) =>{
@@ -36,7 +37,7 @@ export function ConfigurationProjectCard({configurationProject,configuration,onD
         <ExecuteComponent 
         onSuccess={OnSuccess}
         configuration={configuration}
-        dataConfiguration={configuration.dataConfigurations?.find(x=> x.configurationId == configuration.id && x.projectId == null)}/>
+        dataConfiguration={configuration.dataConfigurations?.find(x=> x.configurationId == configuration.id && x.projectId == projectId && x.configurationProjectId == configurationProject?.id)}/>
         </>
     )
     :(
@@ -82,9 +83,11 @@ export function ConfigurationProjectCard({configurationProject,configuration,onD
         </Card>
         {ModalComponent ? <ModalComponent 
         componentKey={configuration.componentKey}
-        configuration={configuration.dataConfigurations?.find(x=> x.configurationId == configuration.id && x.projectId == null)} 
+        configuration={configuration.dataConfigurations?.find(x=> x.configurationId == configuration.id && x.projectId == projectId && x.configurationProjectId == configurationProject?.id)} 
         configurationId={configuration.id}
         onSuccess={OnSuccess}
+        projectId={projectId}
+        configurationProjectId={configurationProject?.id}
         /> : null}
         </>
     )

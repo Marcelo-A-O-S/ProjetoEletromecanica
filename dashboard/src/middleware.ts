@@ -3,7 +3,10 @@ const pathPublics = [
     "/auth/login",
     "/auth/register",
     "/api/auth/login",
-    "/api/auth/register"
+    "/api/auth/register",
+    "/",
+    "/about"
+
 ]
 export default async function middleware(request: NextRequest){
     const {pathname} = request.nextUrl;

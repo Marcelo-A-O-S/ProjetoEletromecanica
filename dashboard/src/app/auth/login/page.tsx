@@ -36,7 +36,7 @@ export default function LoginPage() {
             const sucess = await auth?.login(email, password);
             setIsLoading(false);
             if (sucess) {
-                router.push("/");
+                router.push("/dashboard");
             }
         } catch (err) {
             console.error("Erro ao aceessar", err);

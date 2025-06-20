@@ -1,10 +1,18 @@
 import ExecuteJoystickWebsocket from "@/components/executors/ExecuteJoystickWebsocket";
+import ExecuteSwitchWebsocket from "@/components/executors/ExecuteSwitchWebsocket";
 import FormJoystickWebsocket from "@/components/forms/FormJoystickWebsocket";
+import FormSwitchWebsocket from "@/components/forms/FormSwitchWebsocket";
+import FormLeverWebsocket from "@/components/forms/FormLeverWebsocket";
+import ExecuteLeverWebsocket from "@/components/executors/ExecuteLeverWebsocket";
 const ExecutorMap = {
-  formJoystickWebsocket: ExecuteJoystickWebsocket
+  formJoystickWebsocket: ExecuteJoystickWebsocket,
+  formSwitchWebsocket: ExecuteSwitchWebsocket,
+  formLeverWebsocket: ExecuteLeverWebsocket
 }
 const ComponentMap = {
   formJoystickWebsocket: FormJoystickWebsocket,
+  formSwitchWebsocket: FormSwitchWebsocket,
+  formLeverWebsocket: FormLeverWebsocket
 
 };
 type ExecutorKey = keyof typeof ExecutorMap;

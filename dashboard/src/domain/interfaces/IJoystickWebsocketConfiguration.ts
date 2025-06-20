@@ -3,4 +3,5 @@ export interface IJoystickWebsocketConfiguration{
     dataConfigurationId:number;
     host:string;
     protocol:'ws://'|'wss://';
+    identifier: string;
 }

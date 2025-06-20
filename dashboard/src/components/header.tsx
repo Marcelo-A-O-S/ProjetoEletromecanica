@@ -15,5 +15,11 @@ export default function Header(){
                 </div>
             </div>
         </header>
-    ): null
+    ): (<>
+    <header className="w-full mx-auto bg-transparent">
+        <div className="container  mx-auto flex items-center space-x-4 sm:justify-between sm:space-x-0">
+            <MainNav/>
+        </div>
+    </header>
+    </>)
 }

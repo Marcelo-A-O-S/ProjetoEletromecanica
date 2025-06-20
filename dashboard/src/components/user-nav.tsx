@@ -9,7 +9,7 @@ export function UserNav() {
     const LogoutClick = () =>{
         logout();
     }
-    return (
+    return user?(
         <div className="relative border-b-4 border-transparent py-1">
             <div className="flex justify-center items-center space-x-3 cursor-pointer">
                 <div onClick={()=>setOpenDropdown(!openDropdown)} className="w-10 h-10 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
@@ -36,5 +36,8 @@ export function UserNav() {
                 </ul>
             </div>
         </div>
+    ):(
+        <>
+        </>
     )
 }

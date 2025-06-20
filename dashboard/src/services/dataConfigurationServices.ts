@@ -1,8 +1,14 @@
-import { JoystickWebSocketConfiguration } from "@/domain/models/JoystickWebsocketConfiguration";
+import { JoystickWebsocketConfiguration } from "@/domain/models/JoystickWebsocketConfiguration";
 import { apiClient } from "./apiClient"
 import { IDataConfiguration } from "@/domain/interfaces/IDataConfiguration";
+import { SwitchWebsocketConfiguration } from "@/domain/models/SwitchWebsocketConfiguration";
 
-export const saveJoystickWebsocketConfiguration = async (body: JoystickWebSocketConfiguration ) =>{
+export const saveJoystickWebsocketConfiguration = async (body: JoystickWebsocketConfiguration ) =>{
+    const api = await apiClient();
+    const response  = await api.post("dataConfiguration/add",body);
+    return response;
+}
+export const SaveSwitchWebsocketConfiguration = async(body: SwitchWebsocketConfiguration) =>{
     const api = await apiClient();
     const response  = await api.post("dataConfiguration/add",body);
     return response;

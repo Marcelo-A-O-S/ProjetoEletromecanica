@@ -1,5 +1,5 @@
 import "./globals.css";
-import type { Metadata } from "next";
+
 import { Inter } from 'next/font/google';
 import Container from "@/components/container";
 
@@ -12,10 +12,7 @@ const inter = Inter({
   adjustFontFallback: false
 });
 
-export const metadata: Metadata = {
-  title: "Painel de controle",
-  description: "Painel de gerenciamento do projeto",
-};
+
 
 export default function RootLayout({
   children,

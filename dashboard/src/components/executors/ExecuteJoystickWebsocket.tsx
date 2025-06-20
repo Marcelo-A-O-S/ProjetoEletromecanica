@@ -14,25 +14,32 @@ interface ExecuteJoystickWebsocketProps {
     onSuccess: ()=> void
 }
 export default function ExecuteJoystickWebsocket({ configuration,dataConfiguration, onSuccess }: ExecuteJoystickWebsocketProps) {
+    const [manualClose, setManualClose] = useState(false);
+    const isSendingRef = useRef(false);
+    const [connectionAttempts, setConnectionttempts] = useState(0);
     const socketRef = useRef<WebSocket | null>(null);
+    const lastDirection = useRef<string | null>(null);
     const [isStarting, setIsStarting] = useState(false);
     const [data, setData] = useState<IJoystickWebsocketConfiguration>(
-        dataConfiguration.joystickWebSocketConfiguration ? {
-            host: dataConfiguration.joystickWebSocketConfiguration.host,
-            id: dataConfiguration.joystickWebSocketConfiguration.id,
-            protocol: dataConfiguration.joystickWebSocketConfiguration.protocol,
-            dataConfigurationId: dataConfiguration.joystickWebSocketConfiguration.dataConfigurationId
+        dataConfiguration?.joystickWebsocketConfiguration ? {
+            host: dataConfiguration.joystickWebsocketConfiguration.host,
+            id: dataConfiguration.joystickWebsocketConfiguration.id,
+            protocol: dataConfiguration.joystickWebsocketConfiguration.protocol,
+            dataConfigurationId: dataConfiguration.joystickWebsocketConfiguration.dataConfigurationId,
+            identifier: dataConfiguration.joystickWebsocketConfiguration.identifier
         } : {
             dataConfigurationId: 0,
             host: "",
             id: 0,
-            protocol: "ws://"
+            protocol: "ws://",
+            identifier:""
         }
     )
     useEffect(() => {
-        loadingConnection()
-        console.log(data)
+        setConnectionttempts(0);
+        loadingConnection();
     }, [])
+
     const loadingConnection = async () => {
         if (data.host == "") {
             console.error("Host de conexão não informado!");
@@ -41,31 +48,69 @@ export default function ExecuteJoystickWebsocket({ configuration,dataConfigurati
         console.log(data);
         socketRef.current = new WebSocket(`${data.protocol}${data.host}`);
         socketRef.current.onopen = () => {
-            console.log('Conectado ao WebSocket');
-            setIsStarting(true)
+            console.log(`Conectado ao WebSocket em ${data.protocol}${data.host}`);
+            console.log(`Identificador: ${data.identifier}`);
+            setIsStarting(true);
+            setManualClose(false);
             
         };
+        socketRef.current.onerror = (error)=>{
+            console.error("Websocket error: ",error);
+            //socketRef.current?.close();
+        }
         socketRef.current.onmessage = (event) => {
             console.log('Mensagem recebida:', event.data);
         };
+        socketRef.current.onclose = () => {
+            console.warn("WebSocket desconectado.");
+            setIsStarting(false);
+        
+            if (!manualClose && connectionAttempts < 5) {
+                console.warn("Tentando reconectar...");
+                setConnectionttempts(connectionAttempts+1);
+                setTimeout(() => {
+                    loadingConnection(); // Rechama a função para tentar reconectar
+                }, 2000);
+            } else {
+                console.log("Numero maximo de tentativas alcancado.");
+            }
+        };
+        
 
     }
     const handleMove = (event: IJoystickUpdateEvent) => {
-        console.log('Movimento:', event.direction);
-        const dados = {
-            direction: event.direction
+        if(!isSendingRef.current ){
+            isSendingRef.current = true;
+            
+            console.log('Enviando movimento:', event.direction);
+            const dados = {
+                direction: event.direction
+            }
+            sendMessage(dados);
+            setTimeout(() => {
+                isSendingRef.current = false;
+            }, 200);
         }
-        socketRef.current?.send(JSON.stringify(dados));
+        
     };
-
+    const sendMessage = (dados: any) => {
+        if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+            socketRef.current.send(JSON.stringify(dados));
+        } else {
+            console.warn("WebSocket não está pronto para enviar.");
+        }
+    };
     const handleStop = () => {
         const dados = {
-            direction: "STOP"
+            [data.identifier]: "STOP"
         }
-        socketRef.current?.send(JSON.stringify(dados));
+        sendMessage(dados);
     };
     const closeConnection = async () => {
-        socketRef.current?.close();
+        setManualClose(true); 
+        if (socketRef.current) {
+            socketRef.current.close(); // Fecha a conexão de WebSocket
+        }
         console.log('Conexão WebSocket fechada');
         setIsStarting(false)
         onSuccess();
@@ -80,7 +125,9 @@ export default function ExecuteJoystickWebsocket({ configuration,dataConfigurati
                             <CardDescription>{configuration.description}</CardDescription>
                         </div>
                         <div className="flex w-full justify-end">
-                            <CardDescription>{isStarting?"Conectado": "Conectando..."}</CardDescription>
+                            <CardDescription
+                             className={isStarting ? "text-green-500" : "text-yellow-500"}
+                            >{isStarting?"Conectado": "Conectando..."}</CardDescription>
                         </div>
                     </div>
                 </CardHeader>
@@ -88,7 +135,7 @@ export default function ExecuteJoystickWebsocket({ configuration,dataConfigurati
                     <Joystick
                         size={100}
                         baseColor="gray"
-                        stickColor="black"
+                        stickColor="yellow"
                         move={handleMove}
                         stop={handleStop}
                     />

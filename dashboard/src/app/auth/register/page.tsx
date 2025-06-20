@@ -41,7 +41,7 @@ export default function RegisterPage() {
             const success = await auth?.register(name, email, password);
             setIsLoading(false);
             if(success){
-                router.push("/");
+                router.push("/dashboard");
             }
         }catch(err){
             console.log("Erro: ", err);
