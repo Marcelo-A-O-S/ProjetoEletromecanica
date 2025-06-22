@@ -20,7 +20,7 @@ async function bootstrap() {
 
 bootstrap();
 
-const handler: Handler = async (event, context, callback) => {
+export const handler: Handler = async (event, context, callback) => {
   if (!cachedServer) {
     const app = await bootstrap();
     const expressApp = app.getHttpAdapter().getInstance();
@@ -28,4 +28,4 @@ const handler: Handler = async (event, context, callback) => {
   }
   return cachedServer(event, context, callback);
 };
-export default handler;
+ 
