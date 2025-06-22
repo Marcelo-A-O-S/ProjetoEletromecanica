@@ -1,12 +1,13 @@
-import { UserServices } from "src/services/implements/user.service";
 import { Body, Controller, HttpException, HttpStatus, Post } from "@nestjs/common";
 import { loginSchema, registerSchema } from "../schemas/AuthSchemas";
-import { User } from "src/domain/entities/user.entity";
-import { createToken } from "src/services/implements/jwt.service";
+import { AuthService } from "src/services/implements/auth.service";
+
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly userServices: UserServices) { }
+    constructor(
+        private readonly authServices: AuthService
+    ) { }
     @Post('login')
     async login(@Body() body: any) {
         try {
@@ -15,17 +16,9 @@ export class AuthController {
                 throw new HttpException(resultSchema.error, HttpStatus.BAD_REQUEST);
             }
             const { email, password } = resultSchema.data;
-            const userData = await this.userServices.FindWithPasswordByEmail(email);
-            if (userData.id == 0 || userData.password != password) {
-                throw new HttpException("Credenciais inválidas!", HttpStatus.UNAUTHORIZED);
-
-            } else {
-                const token = createToken({ email: userData.email, name: userData.name, role: userData.role });
-                return { token }
-            }
-
+            return await this.authServices.login(email, password);
         } catch (err) {
-            throw new HttpException(`Internal server error: ${err}`, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException(`Erro interno no servidor.`, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @Post('register')
@@ -36,22 +29,9 @@ export class AuthController {
                 throw new HttpException(resultSchema.error, HttpStatus.BAD_REQUEST);
             }
             const { email, name, password, role } = resultSchema.data;
-            const match = await this.userServices.FindByEmail(email);
-            if (match.id != 0) {
-                return null
-            } else {
-                const user = new User();
-                user.email = email;
-                user.name = name;
-                user.password = password;
-                user.role = role;
-                const result = await this.userServices.Save(user);
-                const token = createToken({ email: result.entity.email, name: result.entity.name, role: result.entity.role });
-                return {token};
-            }
-
+            return await this.authServices.register(email,password, name);
         } catch (err) {
-            throw new HttpException(`Internal server error: ${err}`, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException(`Erro interno no servidor.`, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }

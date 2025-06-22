@@ -1,11 +1,17 @@
 import { UserServices } from "src/services/implements/user.service";
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query, UseGuards } from "@nestjs/common";
 import { DeleteUserSchema, FindByEmailSchema, FindByRolesUserSchema, SaveUserSchema, UpdateUserSchema } from "../schemas/UserSchemas";
 import { User } from "src/domain/entities/user.entity";
+import { AuthGuard } from "src/presentation/guards/auth.guard";
+import { Roles } from "../decorators/roles.decorators";
+import { AuthorizeGuard } from "../guards/authorize.guard";
+
 @Controller('users')
+@UseGuards(AuthGuard, AuthorizeGuard)
 export class UserController {
     constructor(private readonly userServices: UserServices) { }
     @Get('find-by-role')
+    @Roles('admin')
     async findByRoles(@Query('role') role: string) {
         if (!role) {
             throw new HttpException("Role is required", HttpStatus.BAD_REQUEST);
@@ -13,6 +19,7 @@ export class UserController {
         return await this.userServices.FindByRole(role);
     }
     @Get('find-by-email')
+    @Roles('admin')
     async findByEmail(@Query('email') email: string) {
         if (!email) {
             throw new HttpException("Email is required", HttpStatus.BAD_REQUEST);
@@ -24,6 +31,7 @@ export class UserController {
         return user;
     }
     @Get('get-by-id')
+    @Roles('admin')
     async getById(@Query('id') id: string) {
         const numericId = Number(id);
         if (!id || isNaN(numericId)) {
@@ -36,11 +44,13 @@ export class UserController {
         }
         return user;
     }
-    @Get()
+    @Get('all')
+    @Roles('admin')
     async listAll() {
         return await this.userServices.GetAll();
     }
     @Post('save')
+    @Roles('admin')
     async save(@Body() body: any) {
         try {
             const resultSchema = await SaveUserSchema.safeParseAsync(body);
@@ -66,6 +76,7 @@ export class UserController {
         }
     }
     @Post('update')
+    @Roles('admin')
     async update(@Body() body: any) {
         try {
             const resultSchema = await UpdateUserSchema.safeParseAsync(body);
@@ -94,6 +105,7 @@ export class UserController {
         }
     }
     @Delete()
+    @Roles('admin')
     async delete(@Body() body: any) {
         try {
             const resultSchema = await DeleteUserSchema.safeParseAsync(body);
@@ -115,6 +127,7 @@ export class UserController {
         }
     }
     @Delete('delete-by-id')
+    @Roles('admin')
     async deleteById(@Query('id') id: string) {
         try {
             const numericId = Number(id);

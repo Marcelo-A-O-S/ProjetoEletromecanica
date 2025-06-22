@@ -18,6 +18,7 @@ export class UserRepository implements IUserRepository {
             user.email = userDB.email;
             user.name = userDB.name;
             user.password = userDB.password;
+            user.role = userDB.role;
         }
         return user;
     }

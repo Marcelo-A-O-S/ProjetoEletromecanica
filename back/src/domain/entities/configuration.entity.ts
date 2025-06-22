@@ -1,5 +1,4 @@
-import { DataConfiguration } from "./DataConfiguration";
-
+import { DataConfiguration } from "./data-configuration.entity";
 export class Configuration{
     id:number;
     name:string;

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { DataConfiguration } from "src/domain/entities/data-configuration.entity";
 export const joystickWebSocketConfigurationSchema = z.object({
     id: z.number(),
     dataConfigurationId: z.number().optional(),
@@ -41,3 +42,8 @@ export const UpdateDataConfigurationSchema = z.object({
 export const DataConfigurationByIdSchema = z.object({
     id: z.number(),
 })
+
+export type DataConfigurationSchema = z.infer<typeof dataConfigurationSchema>
+export type JoystickWebSocketConfigurationSchema = z.infer<typeof joystickWebSocketConfigurationSchema>
+export type SwitchWebsocketConfigurationSchema = z.infer<typeof switchWebsocketConfigurationSchema>
+export type LeverWebsocketConfigurationSchema = z.infer<typeof leverWebsocketConfigurationSchema>

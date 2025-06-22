@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -24,12 +24,12 @@ model Project {
 }
 
 model ConfigurationProject {
-  id              Int           @id @default(autoincrement())
-  projectId       Int
-  configurationId Int
-  description     String
-  configuration   Configuration @relation(fields: [configurationId], references: [id])
-  project         Project       @relation(fields: [projectId], references: [id])
+  id                Int                 @id @default(autoincrement())
+  projectId         Int
+  configurationId   Int
+  description       String
+  configuration     Configuration       @relation(fields: [configurationId], references: [id])
+  project           Project             @relation(fields: [projectId], references: [id])
   dataConfiguration DataConfiguration[]
 }
 
@@ -38,7 +38,7 @@ model Configuration {
   name                  String
   description           String
   componentKey          String?                @unique
-  configurationProjects ConfigurationProject[] 
+  configurationProjects ConfigurationProject[]
   dataConfigurations    DataConfiguration[]
 }
 
@@ -46,7 +46,7 @@ model DataConfiguration {
   id                             Int                             @id @default(autoincrement())
   configurationId                Int
   projectId                      Int?
-  configurationProjectId Int?
+  configurationProjectId         Int?
   configuration                  Configuration                   @relation(fields: [configurationId], references: [id])
   project                        Project?                        @relation(fields: [projectId], references: [id])
   configurationProject           ConfigurationProject?           @relation(fields: [configurationProjectId], references: [id])
@@ -102,7 +102,8 @@ model SwitchWebsocketConfiguration {
   identifier          String
   dataConfiguration   DataConfiguration @relation(fields: [dataConfigurationId], references: [id])
 }
-model LeverWebsocketConfiguration{
+
+model LeverWebsocketConfiguration {
   id                  Int               @id @default(autoincrement())
   dataConfigurationId Int               @unique
   host                String
