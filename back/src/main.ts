@@ -14,13 +14,15 @@ async function bootstrap() {
   });
   if (process.env.NODE_ENV !== 'production') {
     await app.listen(process.env.PORT ?? 3000);
+  }else {
+    await app.init();
   }
   return app;
 }
 
 bootstrap();
 
-export const handler: Handler = async (event, context, callback) => {
+ const handler: Handler = async (event, context, callback) => {
   if (!cachedServer) {
     const app = await bootstrap();
     const expressApp = app.getHttpAdapter().getInstance();
@@ -28,4 +30,5 @@ export const handler: Handler = async (event, context, callback) => {
   }
   return cachedServer(event, context, callback);
 };
+export default handler;
  
