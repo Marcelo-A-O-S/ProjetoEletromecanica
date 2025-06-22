@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description: "Projeto desenvolvido para disciplina de projetos do colégio Escola Estadual Professor Gastão Valle.",
     images: [
       {
-        url: "https://projeto-eletromecanica-2024.vercel.app/1.jpg",
+        url: "https://projeto-eletromecanica-2024.vercel.app/1.png",
         width: 500,
         height: 500,
         alt: "Projeto de Eletromecânica",
