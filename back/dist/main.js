@@ -5,31 +5,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
-const serverless_express_1 = __importDefault(require("@vendia/serverless-express"));
-let cachedServer;
+const platform_express_1 = require("@nestjs/platform-express");
+const express_1 = __importDefault(require("express"));
+const server = (0, express_1.default)();
 async function bootstrap() {
-    const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    const app = await core_1.NestFactory.create(app_module_1.AppModule, new platform_express_1.ExpressAdapter(server));
     app.enableCors({
         origin: '*',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true,
     });
+    await app.init();
     if (process.env.NODE_ENV !== 'production') {
         await app.listen(process.env.PORT ?? 3000);
-    }
-    else {
-        await app.init();
     }
     return app;
 }
 bootstrap();
-const handler = async (event, context, callback) => {
-    if (!cachedServer) {
-        const app = await bootstrap();
-        const expressApp = app.getHttpAdapter().getInstance();
-        cachedServer = (0, serverless_express_1.default)({ app: expressApp });
-    }
-    return cachedServer(event, context, callback);
-};
-exports.default = handler;
 //# sourceMappingURL=main.js.map
