@@ -1,8 +1,8 @@
 "use client"
 import { useAuth } from "@/context/auth-context";
 import Link from "next/link";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import ToggleTheme from "./toggle-theme";
 export function UserNav() {
     const { user, logout } = useAuth();
     const [ openDropdown , setOpenDropdown] =useState(false);
@@ -11,8 +11,9 @@ export function UserNav() {
     }
     return user?(
         <div className="relative border-b-4 border-transparent py-1">
-            <div className="flex justify-center items-center space-x-3 cursor-pointer">
-                <div onClick={()=>setOpenDropdown(!openDropdown)} className="w-10 h-10 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
+            <div className="flex justify-center items-center space-x-3">
+                <ToggleTheme />
+                <div onClick={()=>setOpenDropdown(!openDropdown)} className="w-10 h-10  cursor-pointer rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
                     <div className="flex h-full items-center justify-center">{user?.name?.[0] || "U"}</div>
                 </div>
             </div>
@@ -20,14 +21,23 @@ export function UserNav() {
                 <ul className="space-y-3 dark:text-white">
                     <li className="text-sm">
                         <Link
-                        href={""}
+                        href={"/dashboard/account"}
                         >
                             Account
                         </Link>
                     </li>
+                    {user.role === 'admin' &&(
+                        <li className="text-sm">
+                        <Link
+                        href={"/dashboard/manage-users"}
+                        >
+                            Manager Accounts
+                        </Link>
+                    </li>
+                    )}
                     <li className="text-sm">
                         <button
-                            className=""
+                            className="cursor-pointer"
                             onClick={LogoutClick}
                         >
                             Logout

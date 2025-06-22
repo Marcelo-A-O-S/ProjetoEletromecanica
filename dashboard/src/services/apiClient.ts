@@ -1,6 +1,6 @@
 import { getToken } from "@/lib/tokenManager";
 import axios from "axios";
-const HOST_API = process.env.NEXT_PUBLIC_HOST || "http://localhost:3001/";
+const HOST_API = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001/";
 export const apiClient = async () =>{
     const token = getToken();
     const instance = axios.create({

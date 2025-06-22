@@ -19,7 +19,6 @@ export async function POST(request: NextRequest) {
       )
     }
     const cookieStore = await cookies();
-    // Set cookie
     cookieStore.set({
       name: "auth-token",
       value: token,

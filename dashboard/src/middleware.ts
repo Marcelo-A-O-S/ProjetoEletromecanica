@@ -1,28 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { parseJWT } from './utils/parse-jwt';
 const pathPublics = [
     "/auth/login",
     "/auth/register",
     "/api/auth/login",
     "/api/auth/register",
     "/",
-    "/about"
-
+    "/about",
+    "/project"
 ]
-export default async function middleware(request: NextRequest){
-    const {pathname} = request.nextUrl;
-    if(pathPublics.some((path)=> pathname.startsWith(path))){
+const pathAdmin = [
+    "/dashboard/manage-users"
+];
+export default async function middleware(request: NextRequest) {
+    const { pathname } = request.nextUrl;
+    if (pathPublics.some((path) => pathname.startsWith(path))) {
         return NextResponse.next();
     }
     const token = request.cookies.get("auth-token")?.value;
-    if(!token){
-        const url = new URL("/auth/login", request.url);
-        url.searchParams.set("from",pathname);
-        return NextResponse.redirect(url);
+    if (!token) {
+        return NextResponse.redirect(new URL("/auth/login", request.url));
     }
+    const user = token ? parseJWT(token) : null;
+    if (!user) {
+        return NextResponse.redirect(new URL("/auth/login", request.url));
+    }
+    if (pathAdmin.some((adminPath) => pathname.startsWith(adminPath))) {
+        if (user.role !== "admin") {
+            return NextResponse.redirect(new URL("/dashboard", request.url));
+        }
+    }
+    return NextResponse.next();
 }
 
 export const config = {
     matcher: [
-      "/((?!_next/static|_next/image|favicon.ico|images).*)",
+        "/((?!_next/static|_next/image|favicon.ico|images).*)",
     ],
-  };
+};

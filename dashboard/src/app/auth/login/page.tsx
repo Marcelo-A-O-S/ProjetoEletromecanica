@@ -87,14 +87,7 @@ export default function LoginPage() {
                         >
                             {isLoading?"Acessando sua conta...":"Acessar"}
                         </Button>
-                        <div className="flex text-sm w-full items-center justify-center p-3 gap-1">
-                            <p className="">
-                                Você não tem um conta?
-                            </p>
-                            <Link className="hover:text-yellow-400" href={"/auth/register"}>
-                                Registre-se
-                            </Link>
-                        </div>
+                        
 
                     </CardFooter>
                 </form>

@@ -8,11 +8,9 @@ import { House } from "lucide-react";
 import { Users } from "lucide-react";
 import { Wrench } from "lucide-react";
 import { LockOpen } from "lucide-react";
-import { Moon } from "lucide-react";
-import { Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import ToggleTheme from "./toggle-theme";
 export function MainNav() {
-    const {theme, setTheme} = useTheme()
     const { user } = useAuth()
     const [openDropdown, setOpenDropdown] = useState(false)
     return user ? (
@@ -80,9 +78,7 @@ export function MainNav() {
                            <LockOpen/> Login
                         </Link>
                     </nav>
-                    <div onClick={()=>theme=="dark"?setTheme('light'):setTheme('dark')} className="border rounded-xl p-2 cursor-pointer">
-                        {theme == "dark"?<Sun/>:<Moon/>}
-                    </div>
+                    <ToggleTheme/>
                     <Menu onClick={() => setOpenDropdown(!openDropdown)} className="flex sm:hidden" />
                 </div>
                 <div className={`${openDropdown ? '' : 'hidden'} flex flex-col p-4 w-full sm:hidden`}>
