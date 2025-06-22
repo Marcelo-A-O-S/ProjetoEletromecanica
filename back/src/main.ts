@@ -13,7 +13,6 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // Só ouve se for local (não na Vercel)
   if (process.env.NODE_ENV !== 'production') {
     await app.listen(process.env.PORT ?? 3000);
   }
@@ -23,7 +22,7 @@ async function bootstrap() {
 
 bootstrap();
 
-export const handler: Handler = async (event, context, callback) => {
+const handler: Handler = async (event, context, callback) => {
   if (!cachedServer) {
     const app = await bootstrap();
     const expressApp = app.getHttpAdapter().getInstance();
@@ -31,3 +30,4 @@ export const handler: Handler = async (event, context, callback) => {
   }
   return cachedServer(event, context, callback);
 };
+export default handler;
