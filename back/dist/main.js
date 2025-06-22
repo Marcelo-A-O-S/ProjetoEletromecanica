@@ -22,4 +22,5 @@ async function bootstrap() {
     return app;
 }
 bootstrap();
+exports.default = server;
 //# sourceMappingURL=main.js.map

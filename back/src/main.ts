@@ -18,3 +18,4 @@ async function bootstrap() {
   return app;
 }
 bootstrap();
+export default server;
