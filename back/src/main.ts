@@ -17,10 +17,8 @@ async function bootstrap() {
   }else {
     await app.init();
   }
-  
   return app;
 }
-
 bootstrap();
 
  const handler: Handler = async (event, context, callback) => {
