@@ -12,12 +12,9 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
-
-  
   if (process.env.NODE_ENV !== 'production') {
     await app.listen(process.env.PORT ?? 3000);
   }
-
   return app;
 }
 
