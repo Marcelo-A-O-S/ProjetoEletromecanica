@@ -16,7 +16,7 @@ export default function Footer() {
             </div>
             <div className='flex w-full items-center justify-center'>
                 <ul className='flex'>
-                    <Link href={""}>
+                    <Link target='_blank' href={"https://github.com/Marcelo-A-O-S/ProjetoEletromecanica"}>
                         <div>
                             <Github/>
                         </div>

@@ -43,7 +43,7 @@ function ProjectCard({ project, onDelete, onEdit }: ProjectCardProps) {
             <CardFooter className="flex items-end">
                 <div className="flex justify-between w-full h-full items-end">
                     <Button
-                        onClick={()=> router.push(`/configuration/${project.id}`)}
+                        onClick={()=> router.push(`/dashboard/project/configuration/${project.id}`)}
                         className="bg-secondary flex items-center hover:cursor-pointer">
                         <Settings />
                         Configurações

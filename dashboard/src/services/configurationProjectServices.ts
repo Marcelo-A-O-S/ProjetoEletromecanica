@@ -7,7 +7,7 @@ export const getConfigurationProject= async(projectId:number)=>{
 }
 export const addConfigurationProject = async(projectId: number, configurationId: number, description:string)=>{
     const api = await apiClient();
-    const response = await api.post(`configurationProject/add`,{projectId,configurationId,description});
+    const response = await api.post(`configurationProject/save`,{projectId,configurationId,description});
     return response;
 }
 export const updateConfigurationProject = async(projectId: number, configurationId: number, description:string)=>{

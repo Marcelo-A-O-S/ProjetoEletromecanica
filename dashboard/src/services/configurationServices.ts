@@ -7,7 +7,7 @@ export const getConfigurations = async() =>{
 }
 export const addConfiguration = async(name:string, description: string, componentKey: string)=>{
     const api = await apiClient();
-    const response = await api.post("configuration/add",{name,description, componentKey});
+    const response = await api.post("configuration/save",{name,description, componentKey});
     return response;
 }
 export const updateConfiguration = async(id:number, name:string, description: string, componentKey: string)=>{

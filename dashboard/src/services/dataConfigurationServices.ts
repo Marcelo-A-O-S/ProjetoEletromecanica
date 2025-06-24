@@ -5,17 +5,17 @@ import { SwitchWebsocketConfiguration } from "@/domain/models/SwitchWebsocketCon
 
 export const saveJoystickWebsocketConfiguration = async (body: JoystickWebsocketConfiguration ) =>{
     const api = await apiClient();
-    const response  = await api.post("dataConfiguration/add",body);
+    const response  = await api.post("dataConfiguration/save",body);
     return response;
 }
 export const SaveSwitchWebsocketConfiguration = async(body: SwitchWebsocketConfiguration) =>{
     const api = await apiClient();
-    const response  = await api.post("dataConfiguration/add",body);
+    const response  = await api.post("dataConfiguration/save",body);
     return response;
 }
 export const addDataConfiguration = async(componentKey: string,dataConfiguration: IDataConfiguration) => {
     const api = await apiClient();
-    const response = await api.post("dataConfiguration/add", {componentKey,dataConfiguration});
+    const response = await api.post("dataConfiguration/save", {componentKey,dataConfiguration});
     return response
 }
 export const updateDataConfiguration = async(componentKey: string, dataConfiguration: IDataConfiguration) =>{
