@@ -8,9 +8,10 @@ import { SeedService } from './services/implements/seed.service';
 import { ProjectModule } from './modules/project.module';
 import { ConfigurationModule } from './modules/configuration.module';
 import { ConfigurationProjectModule } from './modules/configuration-project.module';
+import {DataConfigurationModule} from './modules/data-configuration.module'
 import { UserModule } from './modules/user.module';
 @Module({
-  imports: [AuthModule, PrismaModule, ConfigModule.forRoot({ isGlobal: true }), ProjectModule, ConfigurationModule, ConfigurationProjectModule, UserModule],
+  imports: [AuthModule, PrismaModule, ConfigModule.forRoot({ isGlobal: true }), ProjectModule, ConfigurationModule, ConfigurationProjectModule, UserModule, DataConfigurationModule],
   controllers: [AppController],
   providers: [AppService, SeedService],
 })
