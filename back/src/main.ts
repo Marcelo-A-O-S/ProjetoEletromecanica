@@ -19,7 +19,7 @@ async function bootstrap() {
       }
     },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: false,
+    credentials: true,
   });
   await app.init();
   if (process.env.NODE_ENV !== 'production') {
