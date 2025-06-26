@@ -11,7 +11,18 @@ const server = (0, express_1.default)();
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule, new platform_express_1.ExpressAdapter(server));
     app.enableCors({
-        origin: '*',
+        origin: (origin, callback) => {
+            const allowedOrigins = [
+                'https://projeto-eletromecanica-2025.vercel.app',
+                'http://localhost:3001',
+            ];
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            }
+            else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: false,
     });
