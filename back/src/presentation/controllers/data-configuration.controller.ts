@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query, Put } from "@nestjs/common";
 import { DataConfigurationServices } from "src/services/implements/data-config.service";
 import { DataConfigurationByIdSchema, dataConfigurationSchema, JoystickWebSocketConfigurationSchema, LeverWebsocketConfigurationSchema, SaveDataConfigurationSchema, SwitchWebsocketConfigurationSchema, UpdateDataConfigurationSchema } from "../schemas/DataConfigurationSchema";
 import { DataConfiguration } from "src/domain/entities/data-configuration.entity";
@@ -125,7 +125,7 @@ export class DataConfigurationController {
             throw new HttpException("Erro interno no servidor.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @Post('update')
+    @Put('update')
     async Update(@Body() body){
         try{
             const resultSchema = await UpdateDataConfigurationSchema.safeParseAsync(body);
@@ -177,6 +177,7 @@ export class DataConfigurationController {
             throw new HttpException("Erro interno no servidor.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
     private async saveJoystickWebsocketConfiguration(config: JoystickWebSocketConfigurationSchema | null | undefined, dataConfigurationId: number) { 
         if (config) {
             const joystickWebSocketConfiguration = new JoystickWebsocketConfiguration();
