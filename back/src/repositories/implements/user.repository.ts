@@ -83,10 +83,12 @@ export class UserRepository implements IUserRepository {
             user.id = userDb.id;
             user.name = userDb.name;
             user.email = userDb.email;
+            user.role = userDb.role;
             users.push(user)
         })
         return users;
     }
+     
     async Save(Entity: User): Promise<{ entity: User, message: string }> {
         try {
             if (Entity.id == 0) {

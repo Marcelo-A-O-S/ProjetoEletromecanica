@@ -13,7 +13,7 @@ async function bootstrap() {
     app.enableCors({
         origin: '*',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        credentials: true,
+        credentials: false,
     });
     await app.init();
     if (process.env.NODE_ENV !== 'production') {

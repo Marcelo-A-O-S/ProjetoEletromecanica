@@ -95,6 +95,7 @@ let UserRepository = class UserRepository {
             user.id = userDb.id;
             user.name = userDb.name;
             user.email = userDb.email;
+            user.role = userDb.role;
             users.push(user);
         });
         return users;
