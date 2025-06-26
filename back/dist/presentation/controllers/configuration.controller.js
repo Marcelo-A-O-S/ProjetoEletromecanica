@@ -48,7 +48,7 @@ let ConfigurationController = class ConfigurationController {
             return await this.configurationServices.GetAll();
         }
         catch (err) {
-            throw new common_1.HttpException("Erro interno no servidor.", common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new common_1.HttpException(`Erro interno no servidor: ${err}.`, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async Save(body) {

@@ -35,7 +35,7 @@ export class ConfigurationController {
         try {
             return await this.configurationServices.GetAll();
         } catch (err) {
-            throw new HttpException("Erro interno no servidor.", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException(`Erro interno no servidor: ${err}.`, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @Post('save')
