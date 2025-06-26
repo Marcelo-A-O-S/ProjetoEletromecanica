@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query, Put } from "@nestjs/common";
 import { ConfigurationProjectServices } from "src/services/implements/config-project.service";
 import { DeleteConfigurationProjectByIdSchema, DeleteConfigurationProjectSchema, GetConfigurationProjectByIdSchema, SaveConfigurationProjectSchema, UpdateConfigurationProjectSchema } from "../schemas/ConfigurationProjectSchema";
 import { ConfigurationProject } from "src/domain/entities/configuration-project.entity";

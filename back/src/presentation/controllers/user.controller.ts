@@ -1,5 +1,5 @@
 import { UserServices } from "src/services/implements/user.service";
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query, UseGuards, Put } from "@nestjs/common";
 import { DeleteUserSchema, FindByEmailSchema, FindByRolesUserSchema, SaveUserSchema, UpdateUserSchema } from "../schemas/UserSchemas";
 import { User } from "src/domain/entities/user.entity";
 import { AuthGuard } from "src/presentation/guards/auth.guard";
@@ -75,7 +75,7 @@ export class UserController {
             throw new HttpException(`Internal server erro: ${err}`, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @Post('update')
+    @Put('update')
     @Roles('admin')
     async update(@Body() body: any) {
         try {

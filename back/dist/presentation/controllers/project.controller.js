@@ -126,7 +126,7 @@ let ProjectController = class ProjectController {
             return result;
         }
         catch (err) {
-            throw new common_1.HttpException("Erro interno no servidor.", common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new common_1.HttpException(`Erro interno no servidor:${err}.`, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 };
@@ -152,7 +152,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProjectController.prototype, "Save", null);
 __decorate([
-    (0, common_1.Post)('update'),
+    (0, common_1.Put)('update'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query, UseGuards, Put } from "@nestjs/common";
 import { ConfigurationServices } from "src/services/implements/config.service";
 import { ConfigurationByIdSchema, DeleteConfigurationSchema, SaveConfigurationSchema, UpdateConfigurationSchema } from "../schemas/ConfigurationSchema";
 import { Configuration } from "src/domain/entities/configuration.entity";
@@ -62,7 +62,7 @@ export class ConfigurationController {
             throw new HttpException('Erro interno no servidor', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @Post('update')
+    @Put('update')
     async Update(@Body() body) {
         const resultSchema = await UpdateConfigurationSchema.safeParseAsync(body);
         if (!resultSchema.success) {

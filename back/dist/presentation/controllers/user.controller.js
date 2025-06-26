@@ -183,7 +183,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "save", null);
 __decorate([
-    (0, common_1.Post)('update'),
+    (0, common_1.Put)('update'),
     (0, roles_decorators_1.Roles)('admin'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

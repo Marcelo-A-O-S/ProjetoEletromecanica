@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Post, Query, UseGuards, Put } from "@nestjs/common";
 import { ProjectServices } from "src/services/implements/project.service";
 import { AuthGuard } from "../guards/auth.guard";
 import { AuthorizeGuard } from "../guards/authorize.guard";
@@ -59,7 +59,7 @@ export class ProjectController {
             throw new HttpException("Erro no servidor.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @Post('update')
+    @Put('update')
     async Update(@Body() body) {
         try {
             const resultSchema = await UpdateProjectSchema.safeParseAsync(body);
@@ -110,7 +110,7 @@ export class ProjectController {
             const result = await this.projectServices.DeleteById(projectId);
             return result;
         } catch (err) {
-            throw new HttpException("Erro interno no servidor.", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new HttpException(`Erro interno no servidor:${err}.`, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
