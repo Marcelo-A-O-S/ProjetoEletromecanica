@@ -20,6 +20,6 @@ export const addDataConfiguration = async(componentKey: string,dataConfiguration
 }
 export const updateDataConfiguration = async(componentKey: string, dataConfiguration: IDataConfiguration) =>{
     const api = await apiClient();
-    const response = await api.post("dataConfiguration/update", {componentKey,dataConfiguration});
+    const response = await api.put("dataConfiguration/update", {componentKey,dataConfiguration});
     return response
 }
