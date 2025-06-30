@@ -105,13 +105,13 @@ export function MainNav() {
                     >
                         <Wrench /> Projeto
                     </Link>
-                    <Link
+                    {!isProduction &&(<Link
                         href={"/auth/login"}
                         className="transition-colors flex items-center gap-2  hover:text-primary"
                         onClick={() => setOpenDropdown(false)}
                     >
                         <LockOpen /> Login
-                    </Link>
+                    </Link>)}
                 </div>
             </div>
 
