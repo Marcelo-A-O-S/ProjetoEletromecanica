@@ -10,6 +10,7 @@ import { Wrench } from "lucide-react";
 import { LockOpen } from "lucide-react";
 import { useTheme } from "next-themes";
 import ToggleTheme from "./toggle-theme";
+const isProduction = process.env.NODE_ENV === 'production'
 export function MainNav() {
     const { user } = useAuth()
     const [openDropdown, setOpenDropdown] = useState(false)
@@ -57,28 +58,29 @@ export function MainNav() {
                             href={"/"}
                             className="transition-colors flex items-center gap-2  hover:text-primary"
                         >
-                           <House /> Início
+                            <House /> Início
                         </Link>
                         <Link
                             href={"/about"}
                             className="transition-colors flex items-center gap-2  hover:text-primary"
                         >
-                           <Users /> Quem somos
+                            <Users /> Quem somos
                         </Link>
                         <Link
                             href={"/project"}
                             className="transition-colors flex items-center gap-2  hover:text-primary"
                         >
-                           <Wrench/> Projeto
+                            <Wrench /> Projeto
                         </Link>
-                        <Link
-                            href={"/auth/login"}
-                            className="transition-colors flex items-center gap-2  hover:text-primary"
-                        >
-                           <LockOpen/> Login
-                        </Link>
+                        {!isProduction && (
+                            <Link
+                                href={"/auth/login"}
+                                className="transition-colors flex items-center gap-2  hover:text-primary"
+                            >
+                                <LockOpen /> Login
+                            </Link>)}
                     </nav>
-                    <ToggleTheme/>
+                    <ToggleTheme />
                     <Menu onClick={() => setOpenDropdown(!openDropdown)} className="flex sm:hidden" />
                 </div>
                 <div className={`${openDropdown ? '' : 'hidden'} flex flex-col p-4 w-full sm:hidden`}>
@@ -87,28 +89,28 @@ export function MainNav() {
                         className="transition-colors flex items-center gap-2  hover:text-primary"
                         onClick={() => setOpenDropdown(false)}
                     >
-                       <House/> Início
+                        <House /> Início
                     </Link>
                     <Link
                         href={"/about"}
                         className="transition-colors flex items-center gap-2  hover:text-primary"
                         onClick={() => setOpenDropdown(false)}
                     >
-                       <Users/> Quem somos
+                        <Users /> Quem somos
                     </Link>
                     <Link
                         href={"/project"}
                         className="transition-colors flex items-center gap-2  hover:text-primary"
                         onClick={() => setOpenDropdown(false)}
                     >
-                        <Wrench/> Projeto
+                        <Wrench /> Projeto
                     </Link>
                     <Link
                         href={"/auth/login"}
                         className="transition-colors flex items-center gap-2  hover:text-primary"
                         onClick={() => setOpenDropdown(false)}
                     >
-                       <LockOpen /> Login
+                        <LockOpen /> Login
                     </Link>
                 </div>
             </div>

@@ -12,6 +12,6 @@ export const addConfigurationProject = async(projectId: number, configurationId:
 }
 export const updateConfigurationProject = async(projectId: number, configurationId: number, description:string)=>{
     const api = await apiClient();
-    const response = await api.post(`configurationProject/update`,{projectId,configurationId,description});
+    const response = await api.put(`configurationProject/update`,{projectId,configurationId,description});
     return response;
 }

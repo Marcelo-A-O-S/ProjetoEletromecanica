@@ -12,8 +12,23 @@ const pathPublics = [
 const pathAdmin = [
     "/dashboard/manage-users"
 ];
+const protectedRoutes = [
+    '/auth',
+    '/auth/login',
+    '/auth/register',
+    '/dashboard',
+    '/dashboard/configurations',
+    '/api',
+];
+const isProduction = process.env.NODE_ENV === 'production'
 export default async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
+    const isProtected = protectedRoutes.some((route) =>
+        pathname.startsWith(route)
+    )
+    if (isProduction && isProtected) {
+        return NextResponse.redirect(new URL('/', request.url))
+    }
     if (pathPublics.some((path) => pathname.startsWith(path))) {
         return NextResponse.next();
     }
