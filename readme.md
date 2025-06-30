@@ -1,4 +1,4 @@
-# 🚜 Carregadeira Automatizada com ESP32 + API Node + Next.js + Typescrit + C++
+# 🚜 Carregadeira Automatizada com ESP32 + Nestjs + Next.js + Typescrit + C++
 
 Projeto desenvolvido para avaliação da disciplina de **Projetos** do curso **Técnico em Eletromecânica**, no **Colégio Estadual Professor Gastão Valle**.
 
@@ -6,7 +6,7 @@ Projeto desenvolvido para avaliação da disciplina de **Projetos** do curso **T
 
 ## 📚 Descrição
 
-Este projeto consiste no desenvolvimento de uma **carregadeira automatizada**, controlada por meio de uma **placa eletrônica ESP32**, integrada a um sistema completo com **API Node.js/Express** e **interface web** desenvolvida em **Next.js com TailwindCSS**. O sistema permite armazenar e modularizar dados relevantes, facilitando a comunicação entre hardware e software.
+Este projeto consiste no desenvolvimento de uma **carregadeira automatizada**, controlada por meio de uma **placa eletrônica ESP32**, integrada a um sistema completo com uso do **Nestjs** e **interface web** desenvolvida em **Next.js com TailwindCSS**. O sistema permite armazenar e modularizar dados relevantes, facilitando a comunicação entre hardware e software.
 
 ---
 
@@ -21,8 +21,9 @@ Este projeto consiste no desenvolvimento de uma **carregadeira automatizada**, c
 ### 💻 Software
 - **Plataforma de Desenvolvimento**: VS Code com PlatformIO
 - **Linguagem (Firmware)**: C++ (ESP32)
-- **Backend**: Node.js + Express (API REST para armazenamento de dados) + Typescript
+- **Backend**: Nestjs (API REST para armazenamento de dados) + Typescript
 - **Frontend**: Next.js + TailwindCSS (Interface visual e monitoramento) + Typescript
+- **Banco de dados**: postgreSQL
 
 ---
 
@@ -62,18 +63,18 @@ Este projeto consiste no desenvolvimento de uma **carregadeira automatizada**, c
 
 ---
 
-### 🌐 Backend (Node.js/Express)
+### 🌐 Backend (Nestjs)
 
-1. Acesse a pasta `backend/`
+1. Acesse a pasta `back/`
 2. Instale as dependências:
    ```bash
    npm install
    ```
 3. Inicie a API:
    ```bash
-   npm start
+   npm run start:debug
    ```
-4. A API estará disponível em: `http://localhost:3001`
+4. A API estará disponível em: `http://localhost:3000`
 
 ---
 
@@ -88,7 +89,7 @@ Este projeto consiste no desenvolvimento de uma **carregadeira automatizada**, c
    ```bash
    npm run dev
    ```
-4. Acesse a interface em: `http://localhost:3000`
+4. Acesse a interface em: `http://localhost:3001`
 
 ---
 
