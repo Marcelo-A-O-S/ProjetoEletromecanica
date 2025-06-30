@@ -24,20 +24,20 @@ export const metadata: Metadata = {
       'home',
     ],
   alternates: {
-    canonical: "https://projeto-eletromecanica-2024.vercel.app/",
+    canonical: "https://projeto-eletromecanica-2025.vercel.app/",
     languages: {
-      pt: "https://projeto-eletromecanica-2024.vercel.app/",
+      pt: "https://projeto-eletromecanica-2025.vercel.app/",
     }
   },
   openGraph: {
-    siteName: "Projeto Eletromecânica 2024",
+    siteName: "Projeto Eletromecânica 2025",
     locale: 'pt_BR',
-    title: "Projeto Eletromecânica 2024",
+    title: "Projeto Eletromecânica 2025",
     url: "https://projeto-eletromecanica-2024.vercel.app/",
     description: "Projeto desenvolvido para disciplina de projetos do colégio Escola Estadual Professor Gastão Valle.",
     images: [
       {
-        url: "https://projeto-eletromecanica-2024.vercel.app/1.png",
+        url: "https://projeto-eletromecanica-2025.vercel.app/1.png",
         width: 500,
         height: 500,
         alt: "Projeto de Eletromecânica",
