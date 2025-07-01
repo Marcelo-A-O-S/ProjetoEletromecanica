@@ -17,7 +17,7 @@ import Priscila from "../../assets/Priscila.png"
 import Pablo from "../../assets/Pablo.png"
 export default function AboutClient() {
     return (<main className="container mx-auto py-12 px-4">
-        <section className="max-w-3xl h-screen  flex flex-col justify-center mx-auto text-center">
+        <section className="max-w-3xl min-h-screen px-4 flex flex-col justify-center mx-auto text-center">
             <motion.h1
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function AboutClient() {
             </motion.p>
 
         </section>
-        <section className="mt-16 max-w-3xl h-screen mx-auto text-center">
+        <section className="mt-16 max-w-3xl min-h-screen px-4 mx-auto text-center">
             <motion.h2
                 initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
                 className={`${suisse.className} text-4xl sm:text-6xl font-semibold mb-4`}
@@ -49,7 +49,7 @@ export default function AboutClient() {
             </motion.p>
 
         </section>
-        <section className="flex flex-col">
+        <section className="flex flex-col min-h-screen px-4 ">
             <div className="flex items-center w-full justify-center">
                 <motion.h2
                     initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
