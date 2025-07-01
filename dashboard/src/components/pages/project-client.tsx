@@ -6,7 +6,7 @@ export default function ProjectClient(){
     return(
     <main className="container mx-auto py-12 px-4 space-y-20">
       
-    <section className="text-center max-w-4xl h-screen flex flex-col justify-center mx-auto">
+    <section className="text-center max-w-4xl min-h-screen flex flex-col justify-center mx-auto px-4">
       <motion.h1 
       initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
       className={`${suisse.className} text-4xl sm:text-6xl font-bold mb-4`}>
@@ -20,7 +20,7 @@ export default function ProjectClient(){
     </section>
 
     
-    <section className="grid md:grid-cols-2 gap-8 max-w-5xl h-screen items-center mx-auto">
+    <section className="grid md:grid-cols-2 gap-8 max-w-5xl min-h-screen px-4 items-center mx-auto">
       <motion.div
       initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
       >
@@ -43,7 +43,7 @@ export default function ProjectClient(){
     </section>
 
    
-    <section className="max-w-5xl mx-auto h-screen space-y-8">
+    <section className="max-w-5xl mx-auto min-h-screen px-4 space-y-8">
       <motion.h2 initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="text-2xl font-semibold mb-4">🧰 Tecnologias Utilizadas</motion.h2>
 
       <motion.div 
@@ -60,7 +60,7 @@ export default function ProjectClient(){
       </motion.div>
     </section>
 
-    <section className="max-w-5xl mx-auto h-screen">
+    <section className="max-w-5xl mx-auto min-h-screen px-4">
       <motion.h2 initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="text-2xl font-semibold mb-4">🎯 Objetivos do Projeto</motion.h2>
       <motion.ul 
       initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}
