@@ -4,6 +4,14 @@ Projeto desenvolvido para avaliação da disciplina de **Projetos** do curso **T
 
 ---
 
+## 👀 Apresentacão
+
+
+https://github.com/user-attachments/assets/a3865651-7b58-44e6-85fb-da80f8256ae6
+
+
+---
+
 ## 📚 Descrição
 
 Este projeto consiste no desenvolvimento de uma **carregadeira automatizada**, controlada por meio de uma **placa eletrônica ESP32**, integrada a um sistema completo com uso do **Nestjs** e **interface web** desenvolvida em **Next.js com TailwindCSS**. O sistema permite armazenar e modularizar dados relevantes, facilitando a comunicação entre hardware e software.
