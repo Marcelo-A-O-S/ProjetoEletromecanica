@@ -114,8 +114,3 @@ Este projeto é de caráter educacional e não possui fins lucrativos.
 
 ---
 
-## 💡 Extras (Ideias Futuras)
-
-- Controle remoto via aplicativo mobile
-- Monitoramento em tempo real via WebSocket
-
