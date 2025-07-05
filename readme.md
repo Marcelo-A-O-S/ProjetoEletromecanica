@@ -58,7 +58,7 @@ Este projeto consiste no desenvolvimento de uma **carregadeira automatizada**, c
 ### 🚀 Firmware (ESP32)
 
 1. Instale o [VS Code](https://code.visualstudio.com/) e a extensão **PlatformIO IDE**
-2. Acesse a pasta `firmware/`
+2. Acesse a pasta `iot/carregadeira/`
 3. Conecte a placa ESP32 via USB
 4. Compile e envie o código:
    ```bash
