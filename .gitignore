@@ -1,6 +1,9 @@
 /painel
 /mobile
 .vscode
-/iot/node_modules
-/iot/.pio
+iot/carregadeira/node_modules/
+iot/carregadeira/.pio/
+iot/carregadeira/.vscode/
+iot/carregadeira/build/
+back/.env
 /iot/build
